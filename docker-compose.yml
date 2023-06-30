@@ -1,0 +1,45 @@
+version: "3.3"
+
+secrets:
+  ssh_key:
+    file: ~/.ssh/id_rsa
+
+services:
+
+  nodejs:
+    container_name: "${CONTAINER_NAME_NODEJS}"
+    tty: true
+    build:
+      context: "${PROJECT_DIR}/docker/nodejs/"
+      dockerfile: "Dockerfile"
+      args:
+        NODEJS_IMAGE_VERSION: ${DOCKER_NODEJS_IMAGE_VERSION}
+        HOST_USER: ${HOST_USER}
+        HOST_UID: ${HOST_UID}
+        HOST_GID: ${HOST_GID}
+    secrets:
+      - ssh_key
+    user: "${HOST_UID}:${HOST_GID}"
+#    depends_on:
+#      - database
+    networks:
+      - frontend
+      - backend
+    volumes:
+      - ${SRC_ROOT_DIR}/:/home/${HOST_USER}/src
+      - /etc/group:/etc/group:ro
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/shadow:/etc/shadow:ro
+      - ~/.gitconfig:/home/${HOST_USER}/.gitconfig:ro
+      - ${PROJECT_DIR}/docker/nodejs/.bashrc:/home/${HOST_USER}/.bashrc
+    working_dir: /home/${HOST_USER}/src
+    environment:
+      HOST_USER: ${HOST_USER}
+      HOST_UID: ${HOST_UID}
+      HOST_GID: ${HOST_GID}
+
+networks:
+  backend:
+    enable_ipv6: false
+  frontend:
+    enable_ipv6: false
