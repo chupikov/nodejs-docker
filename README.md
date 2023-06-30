@@ -6,6 +6,11 @@ The Docker configuration for Node.js allows you to use Node.js without installin
 You can use this solution system-wide or for each project separately.
 It provides the possibility to select any version of Node.js.
 
+See also:
+
+* [Docker official image for the Node.js](https://hub.docker.com/_/node/).
+* [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp).
+
 Please NOTE that this configuration is intended for use with Node.js-based tools and is not meant for developing Node.js applications.
 
 INSTALL
