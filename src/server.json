@@ -1,0 +1,9 @@
+{
+    "version": "1",
+    "host": "docker-nodejs.dev.mirasoltek.com",
+    "port": {
+        "internal": 8080,
+        "external": 80
+    },
+    "public": "__public"
+}

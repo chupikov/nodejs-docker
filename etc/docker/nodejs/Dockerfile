@@ -1,4 +1,4 @@
-ARG NODEJS_IMAGE_VERSION=""
+ARG NODEJS_IMAGE_VERSION="alpine"
 
 FROM node:${NODEJS_IMAGE_VERSION}
 
@@ -9,8 +9,6 @@ ARG HOST_GID=1000
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 
-RUN ls -la
-RUN whoami
 RUN mkdir -p /root/.ssh && ln -s /run/secrets/ssh_key /root/.ssh/id_rsa
 RUN mkdir -p /home/${HOST_USER}/.ssh \
     && chown -R ${HOST_UID}:${HOST_GID} /home/${HOST_USER} \

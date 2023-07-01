@@ -1,0 +1,9 @@
+{
+    "version": "1",
+    "host": "localhost",
+    "port": {
+        "internal": 8080,
+        "external": 80
+    },
+    "public": "__public"
+}

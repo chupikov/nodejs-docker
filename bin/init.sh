@@ -42,13 +42,13 @@ echo
 for dir in "${roots[@]}"; do
   echo "Search samples in the directory: ${dir}"
 
-  command eval 'samples=($(find ${dir} -type f -name "*.sample"))'
+  command eval 'samples=($(find ${dir} -type f -name "*.sample*"))'
 
   for sample in "${samples[@]}"; do
 
     [[ ${sample} =~ \.env\.sample ]] && continue
 
-    file=`echo ${sample} | sed -e "s/\.sample$//"`
+    file=`echo ${sample} | sed -e "s/\.sample//"`
 
     if [ ! -f "$file" ]
     then

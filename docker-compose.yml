@@ -25,6 +25,8 @@ services:
     networks:
       - frontend
       - backend
+    ports:
+      - "${CONTAINER_EXT_PORT_NODEJS}:${CONTAINER_INT_PORT_NODEJS}"
     volumes:
       - ${SRC_ROOT_DIR}/:/home/${HOST_USER}/src
       - /etc/group:/etc/group:ro
