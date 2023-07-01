@@ -8,11 +8,9 @@ ARG HOST_GID=1000
 
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
-ENV USER ${HOST_USER}
 
-USER ${HOST_UID}:${HOST_GID}
-# USER ${HOST_USER}
-
+RUN ls -la
+RUN whoami
 RUN mkdir -p /root/.ssh && ln -s /run/secrets/ssh_key /root/.ssh/id_rsa
 RUN mkdir -p /home/${HOST_USER}/.ssh \
     && chown -R ${HOST_UID}:${HOST_GID} /home/${HOST_USER} \
@@ -42,3 +40,8 @@ SHELL ["/bin/bash", "--rcfile", "/root/.bashrc", "-c"]
 RUN echo "${HOST_USER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${HOST_USER} \
     && chmod 0440 /etc/sudoers.d/${HOST_USER} \
     ;
+
+ENV USER ${HOST_USER}
+
+USER ${HOST_UID}:${HOST_GID}
+# USER ${HOST_USER}
