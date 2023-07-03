@@ -79,6 +79,24 @@ docker-compose down
 bin/stop.sh
 ```
 
+TEST
+====
+
+The configuration includes test scripts to check if the configuration works:
+
+1. Console script `test.js`.
+2. Test server `server.js`.
+
+You can run scripts from the host machine (without logging into the Docker container):
+
+```bash
+# Run console script.
+bin/npm start
+
+# Start a test web server.
+bin/npm run server
+```
+
 COMMANDS
 ========
 
