@@ -7,22 +7,27 @@
  * @version 1.0.0
  */
 (() => {
-    const msg = "\
-Hello buddy!\n\
-Welcome to the Docker configuration for Node.js.\n\
+    process.env["TEST_VERSION"] = "1.0.0";
+    const msg = `\
+Docker configuration for Node.js test script.\n\
+Version ${process.env['TEST_VERSION']}\n\
+\n\
 Product page: https://github.com/chupikov/nodejs-docker\n\
-";
-
-    const env = Object.keys(process.env).sort().reduce(
-        (a, key) => { 
-          a[key] = process.env[key]; 
-          return a;
-        }, 
-        {}
-    );
+`;
 
     console.log(msg);
-    printObject(env);
+    printEnv();
+
+    function printEnv() {
+        const env = Object.keys(process.env).sort().reduce(
+            (a, key) => { 
+              a[key] = process.env[key]; 
+              return a;
+            }, 
+            {}
+        );
+        printObject(env);
+    }
 
     function keyLength(array) {
         let width = 0;
@@ -35,7 +40,7 @@ Product page: https://github.com/chupikov/nodejs-docker\n\
     }
 
     function printObject(object) {
-        const w = keyLength(env);
+        const w = keyLength(object);
         for (let key in object) {
             console.log(key.padEnd(w, " ") + ` : ${object[key]}`);
         }
