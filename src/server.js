@@ -30,12 +30,15 @@ import { fileURLToPath } from 'url';
             version: "0.1.0",
             host: "localhost",
             port: {
-                internal: 8080,
-                external: 80,
+                // internal: 8080,
+                // external: 80,
             },
             public: __public,
         }
     ;
+
+
+    // Load configuration
 
     let config = {};
 
@@ -46,15 +49,44 @@ import { fileURLToPath } from 'url';
         console.error(`Server config file not found: ${configFile}`);
     }
 
+
+    // Set internal and external port numbers
+    // (really we need internal port number only)
+
+    if (typeof process.env.CONTAINER_EXT_PORT_NODEJS !== "undefined"
+    && process.env.CONTAINER_EXT_PORT_NODEJS > 0
+    && (typeof config.port === "undefined" || typeof config.port.external === "undefined")
+    ) {
+        if (typeof config.port === "undefined") {
+            config.port = {};
+        }
+        config.port.external = process.env.CONTAINER_EXT_PORT_NODEJS;
+    }
+
+    if (typeof process.env.CONTAINER_INT_PORT_NODEJS !== "undefined"
+    && process.env.CONTAINER_INT_PORT_NODEJS > 0
+    && (typeof config.port === "undefined" || typeof config.port.internal === "undefined")
+    ) {
+        if (typeof config.port === "undefined") {
+            config.port = {};
+        }
+        config.port.internal = process.env.CONTAINER_INT_PORT_NODEJS;
+    }
+
+
+    // Apply defaults for unset configuration options
+
     for (let key in defaults) {
         if (typeof config[key] === "undefined") {
             config[key] = defaults[key];
         }
     }
 
+
     for (let p in filesystem) {
         config.public = config.public.replace(`__${p}`, filesystem[p]);
     }
+
 
     const app = express();
 
@@ -64,6 +96,7 @@ import { fileURLToPath } from 'url';
         console.log("\nDev server for TabURL Customazer Website.");
         console.log(`SERVER URL: http://${config.host}` + (config.port.external != 80 ? `:${config.port.external}` : "") + "/");
         console.log(`Internal port: ${config.port.internal}`);
+        console.log(`External port: ${config.port.external}`);
         console.log(`Server version: ${defaults.version}`);
         console.log(`Config version: ${config.version}`);
         console.log(`Public directory: "${config.public}".`);

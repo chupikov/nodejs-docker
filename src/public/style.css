@@ -1,0 +1,62 @@
+:root {
+    color-scheme: light dark;
+    font-family: lato, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 16px;
+}
+html {
+    width: 100%;
+    height: 100%;
+}
+body {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @media (prefers-color-scheme: dark) {
+        background-color: #282828;
+        background: radial-gradient(at 50% 35%, #282828, #000);
+    }
+    @media (prefers-color-scheme: light) {
+        background: radial-gradient(at 50% 35%, #fff, rgb(205, 214, 223));
+    }
+}
+.container {
+    max-width: 800px;
+}
+
+a, a:visited {
+    color: #06c;
+}
+
+footer {
+    margin: 50px 0 0 0;
+    opacity: .6;
+}
+footer a {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+}
+footer a:after {
+    content: "";
+    display: block;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 1px;
+    transition-duration: .3s;
+    background-color: #06c;
+}
+footer a:hover:after {
+    width: 100%;
+    height: 1px;
+}
+
+.note {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #06c;
+    color: #fff;
+    font-size: 120%;
+}
