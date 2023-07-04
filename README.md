@@ -3,6 +3,10 @@ Docker setup for Node.js
 
 The Docker configuration for Node.js allows you to use Node.js without installing it on the host machine.
 
+This configuration is intended for using Node.js-based tools
+(like [gulp](https://gulpjs.com/), [grunt](https://gruntjs.com/) or [webpack](https://webpack.js.org/))
+in projects in other programming languages.
+
 You can use this solution system-wide or for each project separately.
 It provides the possibility to select any version of Node.js.
 
