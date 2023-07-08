@@ -13,14 +13,26 @@ See also:
 
 Please NOTE that this configuration is intended for use with Node.js-based tools and is not meant for developing Node.js applications.
 
+
 INSTALL
 =======
+
+
+Before building the image for the first time
+--------------------------------------------
 
 After clone/copy source files:
 
 1. Copy `.env.sample` to `.env`.
-2. Configure `.env`.
-3. Run `bin/init.sh` - script creates required files and  directories.
+2. Configure the `.env` file.
+3. Run `bin/init.sh` - this script creates the required files and directories.
+
+After starting the container for the first time
+-----------------------------------------------
+
+1. Connect to the container using the command `bin/node-connect.sh`.
+2. Execute `bin/init.sh` within the container - this will install and initialize dependencies, such as the required NPM packages.
+
 
 CONFIGURATION
 =============
