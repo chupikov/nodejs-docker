@@ -39,7 +39,11 @@ RUN echo "${HOST_USER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${HOST_USER} \
     && chmod 0440 /etc/sudoers.d/${HOST_USER} \
     ;
 
+
+
 ENV USER ${HOST_USER}
 
 USER ${HOST_UID}:${HOST_GID}
 # USER ${HOST_USER}
+
+# RUN npm install
